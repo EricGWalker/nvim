@@ -131,6 +131,7 @@ return {
       telescope_keymap { 'n', [[<leader>ft]], builtin.builtin, ['desc'] = '[F]ind [T]elescope Tags' }
       telescope_keymap { 'n', [[<leader>fk]], builtin.keymaps, ['desc'] = '[F]ind [K]eymaps' }
       telescope_keymap { 'n', [[<leader>fh]], builtin.help_tags, ['desc'] = '[F]ind [H]elp' }
+      telescope_keymap { 'n', [[<leader>fc]], builtin.colorscheme, ['desc'] = '[F]ind [C]olorscheme' }
       telescope_keymap { 'n', [[<leader>u]], extensions.undo.undo, ['desc'] = '[_][U]ndo' }
       telescope_keymap { 'n', [[<leader><leader>]], builtin.buffers, ['desc'] = '[_]Find Buffers' }
 
