@@ -11,6 +11,7 @@ return {
     event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'debugloop/telescope-undo.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
         'nvim-telescope/telescope-fzf-native.nvim',
 
@@ -65,48 +66,83 @@ return {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          ['undo'] = {
+            -- These are the defaults copy pasted
+            -- https://github.com/debugloop/telescope-undo.nvim
+            use_delta = true,
+            use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
+            side_by_side = false,
+            vim_diff_opts = {
+              ctxlen = vim.o.scrolloff,
+            },
+            entry_format = 'state #$ID, $STAT, $TIME',
+            time_format = '',
+            saved_only = false,
+            mappings = {
+              i = {
+                ['<cr>'] = require('telescope-undo.actions').yank_additions,
+                ['<S-cr>'] = require('telescope-undo.actions').yank_deletions,
+                ['<C-cr>'] = require('telescope-undo.actions').restore,
+                -- alternative defaults, for users whose terminals do questionable things with modified <cr>
+                ['<C-y>'] = require('telescope-undo.actions').yank_deletions,
+                ['<C-r>'] = require('telescope-undo.actions').restore,
+              },
+              n = {
+                ['y'] = require('telescope-undo.actions').yank_additions,
+                ['Y'] = require('telescope-undo.actions').yank_deletions,
+                ['u'] = require('telescope-undo.actions').restore,
+              },
+            },
+          },
         },
       }
 
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'undo')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      local extensions = require('telescope').extensions
 
-      -- Slightly advanced example of overriding default behavior and theme
-      vim.keymap.set('n', '<leader>/', function()
-        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+      local function telescope_keymap(entry)
+        local mode = entry.mode or entry[1]
+        local lhs = entry.lhs or entry[2]
+        local rhs = entry.rhs or entry[3]
+        local opts = entry.opts or entry[4] or {}
+        local desc = entry.desc
+        if not entry.opts and desc then
+          opts = {
+            desc = 'Telescope: ' .. desc,
+          }
+        end
+        vim.keymap.set(mode, lhs, rhs, opts)
+      end
 
-      -- It's also possible to pass additional configuration options.
-      --  See `:help telescope.builtin.live_grep()` for information about particular keys
-      vim.keymap.set('n', '<leader>s/', function()
-        builtin.live_grep {
-          grep_open_files = true,
-          prompt_title = 'Live Grep in Open Files',
-        }
-      end, { desc = '[S]earch [/] in Open Files' })
+      telescope_keymap { 'n', [[<leader>fd]], builtin.diagnostics, ['desc'] = '[F]ind [D]iagnostics' }
+      telescope_keymap { 'n', [[<leader>fr]], builtin.resume, ['desc'] = '[F]ind [R]esume' }
+      telescope_keymap { 'n', [[<leader>f.]], builtin.oldfiles, ['desc'] = '[F]ind Recent Files ("." for repeat' }
+      telescope_keymap { 'n', [[<leader>fw]], builtin.grep_string, ['desc'] = '[F]ind current [W]ord' }
+      telescope_keymap { 'n', [[<leader>ff]], builtin.find_files, ['desc'] = '[F]ind [Files]' }
+      telescope_keymap { 'n', [[<leader>fd]], builtin.fd, ['desc'] = '[F][D] Search' }
+      telescope_keymap { 'n', [[<leader>fg]], builtin.live_grep, ['desc'] = '[F]ind [G]rep' }
+      telescope_keymap { 'n', [[<leader>fi]], builtin.current_buffer_fuzzy_find, ['desc'] = '[F]ind [I]n Buffer' }
+      telescope_keymap { 'n', [[<leader>ft]], builtin.builtin, ['desc'] = '[F]ind [T]elescope Tags' }
+      telescope_keymap { 'n', [[<leader>fk]], builtin.keymaps, ['desc'] = '[F]ind [K]eymaps' }
+      telescope_keymap { 'n', [[<leader>fh]], builtin.help_tags, ['desc'] = '[F]ind [H]elp' }
+      telescope_keymap { 'n', [[<leader>u]], extensions.undo.undo, ['desc'] = '[_][U]ndo' }
+      telescope_keymap { 'n', [[<leader><leader>]], builtin.buffers, ['desc'] = '[_]Find Buffers' }
 
       -- Shortcut for searching your Neovim configuration files
-      vim.keymap.set('n', '<leader>sn', function()
-        builtin.find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = '[S]earch [N]eovim files' })
+      telescope_keymap {
+        mode = 'n',
+        lhs = '<leader>fn',
+        rhs = function()
+          builtin.find_files { cwd = vim.fn.stdpath 'config' }
+        end,
+        desc = '[F]ind [N]eovim files',
+      }
     end,
   },
 }
