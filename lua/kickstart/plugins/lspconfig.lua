@@ -230,14 +230,18 @@ return {
             },
           },
         },
-        basedpyright = {},
+        pyright = {},
         ruff = {},
-        ['django-template-lsp'] = {},
+        ['django-template-lsp'] = {
+          root_dir = require('lspconfig.util').root_pattern('manage.py', '.git'),
+        },
         zls = {},
         clangd = {},
         bashls = {},
         dockerls = {},
         docker_compose_language_service = {},
+        ['nil_ls'] = {},
+        html = {},
       }
 
       -- Ensure the servers and tools above are installed
