@@ -91,6 +91,7 @@ return {
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
           lsp_keymap('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          lsp_keymap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -230,7 +231,7 @@ return {
             },
           },
         },
-        pyright = {},
+        basedpyright = {},
         ruff = {},
         ['django-template-lsp'] = {
           root_dir = require('lspconfig.util').root_pattern('manage.py', '.git'),
