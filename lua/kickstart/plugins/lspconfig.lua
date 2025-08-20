@@ -233,9 +233,10 @@ return {
         },
         basedpyright = {},
         ruff = {},
-        ['django-template-lsp'] = {
-          root_dir = require('lspconfig.util').root_pattern('manage.py', '.git'),
-        },
+        -- ['django-template-lsp'] = {
+        --   root_dir = require('lspconfig.util').root_pattern('manage.py', '.git'),
+        --   cmd = { 'djlsp' },
+        -- },
         zls = {},
         clangd = {},
         bashls = {},
@@ -277,6 +278,11 @@ return {
             require('lspconfig')[server_name].setup(server)
           end,
         },
+      }
+
+      -- There's a bug where this is the only way to get djlsp to activate
+      require('lspconfig').djlsp.setup {
+        root_dir = require('lspconfig.util').root_pattern('manage.py', '.git'),
       }
     end,
   },
