@@ -34,9 +34,11 @@ return {
         lua = { 'stylua' },
         python = { 'ruff_format' },
         htmldjango = { 'djlint' },
-        php = { 'php_cs_fixer' },
-        html = { 'prettier' },
-
+        c = { 'clang-format' },
+        jsonc = { 'fixjson' },
+        json = { 'fixjson' },
+        sh = { 'beautysh' },
+        sql = { 'pg_format' },
         -- Conform can also run multiple formatters sequentially
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },

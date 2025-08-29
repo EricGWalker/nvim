@@ -245,8 +245,7 @@ return {
         -- ['nil_ls'] = {},
         html = {},
         phpactor = {},
-        ['php-cs-fixer'] = {},
-        prettier = {},
+        postgres_lsp = {},
       }
 
       -- Ensure the servers and tools above are installed
