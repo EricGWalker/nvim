@@ -246,6 +246,23 @@ return {
         html = {},
         phpactor = {},
         postgres_lsp = {},
+        prettier = {
+          bin = 'prettier', -- or `'prettierd'` (v0.23.3+)
+          filetypes = {
+            'css',
+            'graphql',
+            'html',
+            'javascript',
+            'javascriptreact',
+            'json',
+            'less',
+            'markdown',
+            'scss',
+            'typescript',
+            'typescriptreact',
+            'yaml',
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
