@@ -294,15 +294,18 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            -- Old Way to configure an lsp server
+            -- require('lspconfig')[server_name].setup(server)
+            -- New way:
+            vim.lsp.config(server_name, server)
           end,
         },
       }
 
-      -- There's a bug where this is the only way to get djlsp to activate
-      require('lspconfig').djlsp.setup {
-        root_dir = require('lspconfig.util').root_pattern('manage.py', '.git'),
-      }
+      -- -- There's a bug where this is the only way to get djlsp to activate
+      -- require('lspconfig').djlsp.setup {
+      --   root_dir = require('lspconfig.util').root_pattern('manage.py', '.git'),
+      -- }
     end,
   },
 }
