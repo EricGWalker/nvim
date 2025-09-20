@@ -231,21 +231,6 @@ return {
             },
           },
         },
-        basedpyright = {},
-        ruff = {},
-        -- ['django-template-lsp'] = {
-        --   root_dir = require('lspconfig.util').root_pattern('manage.py', '.git'),
-        --   cmd = { 'djlsp' },
-        -- },
-        zls = {},
-        clangd = {},
-        bashls = {},
-        dockerls = {},
-        docker_compose_language_service = {},
-        -- ['nil_ls'] = {},
-        html = {},
-        phpactor = {},
-        postgres_lsp = {},
         prettier = {
           bin = 'prettier', -- or `'prettierd'` (v0.23.3+)
           filetypes = {
@@ -263,6 +248,21 @@ return {
             'yaml',
           },
         },
+        basedpyright = {},
+        ruff = {},
+        -- ['django-template-lsp'] = {
+        --   root_dir = require('lspconfig.util').root_pattern('manage.py', '.git'),
+        --   cmd = { 'djlsp' },
+        -- },
+        zls = {},
+        clangd = {},
+        bashls = {},
+        dockerls = {},
+        docker_compose_language_service = {},
+        -- ['nil_ls'] = {},
+        html = {},
+        phpactor = {},
+        sleek = {},
       }
 
       -- Ensure the servers and tools above are installed

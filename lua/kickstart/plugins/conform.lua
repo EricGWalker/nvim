@@ -38,7 +38,7 @@ return {
         jsonc = { 'fixjson' },
         json = { 'fixjson' },
         sh = { 'beautysh' },
-        sql = { 'pg_format' },
+        sql = { 'sleek' },
         markdown = { 'markdownlint' },
         html = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
