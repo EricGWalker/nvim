@@ -38,7 +38,7 @@ return {
         jsonc = { 'fixjson' },
         json = { 'fixjson' },
         sh = { 'beautysh' },
-        sql = { 'sleek' },
+        sql = { 'pg_format' }, -- requires manual installation as mason installation was cooked.
         markdown = { 'markdownlint' },
         html = { 'prettier' },
         -- Conform can also run multiple formatters sequentially

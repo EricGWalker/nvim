@@ -262,7 +262,8 @@ return {
         -- ['nil_ls'] = {},
         html = {},
         phpactor = {},
-        sleek = {},
+        omnisharp = {},
+        sqlls = {},
       }
 
       -- Ensure the servers and tools above are installed
