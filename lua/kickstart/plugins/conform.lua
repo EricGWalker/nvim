@@ -40,6 +40,7 @@ return {
         sh = { 'beautysh' },
         sql = { 'pg_format' }, -- requires manual installation as mason installation was cooked.
         markdown = { 'markdownlint' },
+        php = { 'prettier', 'pretty-php' }, -- Make sure to manually change the parser for php files to html in the project config (b/c I don't know how to do that in the nvim config)
         html = { 'prettierd', 'prettier', stop_after_first = true },
         css = { 'prettierd', 'prettier', stop_after_first = true },
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
