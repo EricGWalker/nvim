@@ -264,6 +264,7 @@ return {
         phpactor = {},
         omnisharp = {},
         sqlls = {},
+        texlab = {},
       }
 
       -- Ensure the servers and tools above are installed
