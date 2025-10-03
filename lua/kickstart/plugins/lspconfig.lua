@@ -263,7 +263,7 @@ return {
         html = {},
         phpactor = {},
         omnisharp = {},
-        sqlls = {},
+        -- sqlls = {},
         texlab = {},
       }
 
