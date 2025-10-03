@@ -304,6 +304,23 @@ return {
         },
       }
 
+      -- -- Manually enabled lsps
+      -- Note this is only setup to enable default settings
+      -- Learn more lua and more about the nvim api to enable handling optional configs
+      local manual_servers = {
+        {
+          -- For some reason the postgrestools completions is broken when I install it through mason
+          -- But if it's installed through my package manager, completion is no longer broken
+          binary = 'postgrestools',
+          name = 'postgres_lsp',
+        },
+      }
+      for _, server in pairs(manual_servers) do
+        if vim.fn.executable(server.binary) then
+          vim.lsp.enable(server.name)
+        end
+      end
+
       -- -- There's a bug where this is the only way to get djlsp to activate
       -- require('lspconfig').djlsp.setup {
       --   root_dir = require('lspconfig.util').root_pattern('manage.py', '.git'),
