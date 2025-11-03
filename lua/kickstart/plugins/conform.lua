@@ -44,7 +44,7 @@ return {
         -- sql = { 'sleek' },
 
         markdown = { 'markdownlint' },
-        php = { 'pretty-php' }, -- Make sure to manually change the parser for php files to html in the project config (b/c I don't know how to do that in the nvim config)
+        php = { lsp_format = 'last' },
         html = { 'prettierd', 'prettier', stop_after_first = true },
         css = { 'prettierd', 'prettier', stop_after_first = true },
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
@@ -53,6 +53,10 @@ return {
         -- Conform can also run multiple formatters sequentially
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      },
+
+      default_format_opts = {
+        lsp_format = 'fallback',
       },
     },
   },

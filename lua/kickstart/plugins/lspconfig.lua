@@ -261,7 +261,9 @@ return {
         docker_compose_language_service = {},
         -- ['nil_ls'] = {},
         html = {},
-        phpactor = {},
+        intelephense = {
+          licenseKey = '~/intelephense/license.txt',
+        },
         omnisharp = {},
         -- sqlls = {},
         texlab = {},
