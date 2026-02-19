@@ -263,7 +263,9 @@ return {
         html = {},
         intelephense = {
           init_options = {
-            licenseKey = '~/intelephense/license.txt',
+            -- THIS NEEDS TO BE licence not license
+            -- Note the brithish spelling.
+            licenceKey = os.getenv 'HOME' .. '/intelephense/licence.txt',
           },
         },
         omnisharp = {},
