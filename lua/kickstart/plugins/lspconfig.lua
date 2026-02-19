@@ -262,7 +262,9 @@ return {
         -- ['nil_ls'] = {},
         html = {},
         intelephense = {
-          licenseKey = '~/intelephense/license.txt',
+          init_options = {
+            licenseKey = '~/intelephense/license.txt',
+          },
         },
         omnisharp = {},
         -- sqlls = {},
