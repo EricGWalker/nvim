@@ -261,13 +261,6 @@ return {
         docker_compose_language_service = {},
         -- ['nil_ls'] = {},
         html = {},
-        intelephense = {
-          init_options = {
-            -- THIS NEEDS TO BE licence not license
-            -- Note the brithish spelling.
-            licenceKey = os.getenv 'HOME' .. '/intelephense/licence.txt',
-          },
-        },
         omnisharp = {},
         -- sqlls = {},
         texlab = {},
@@ -297,15 +290,15 @@ return {
         automatic_installation = false,
         handlers = {
           function(server_name)
-            local server = servers[server_name] or {}
+            local server_config = servers[server_name] or {}
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
             -- Old Way to configure an lsp server
             -- require('lspconfig')[server_name].setup(server)
             -- New way:
-            vim.lsp.config(server_name, server)
+            vim.lsp.config(server_name, server_config)
           end,
         },
       }
