@@ -6,8 +6,20 @@ return {
   },
   settings = {
     intelephense = {
-      files = { maxSize = 1100000 },
-      telemetry = { enabled = true },
+      files = {
+        maxSize = 1000000,
+        exclude = {
+          '**/.git/**',
+          '**/CVS/**',
+          '**/.hg/**',
+          '**/.svn/**',
+          '**/.DS_Store/**',
+          '**/node_modules/**',
+          '**/bower_components/**',
+          '**/.history/**',
+          '**/vendor/**/{vendor,tests}/**',
+        },
+      },
     },
   },
 }
