@@ -71,6 +71,9 @@ vim.opt.scrolloff = 10
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
+-- enable exrc so that local directories can have a .nvim.lua config file
+vim.o.exrc = true
+
 -- Disable netrw in favor of neotree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
