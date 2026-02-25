@@ -307,16 +307,25 @@ return {
       -- Note this is only setup to enable default settings
       -- Learn more lua and more about the nvim api to enable handling optional configs
       local manual_servers = {
-        {
+        postgres_lsp = {
           -- For some reason the postgrestools completions is broken when I install it through mason
           -- But if it's installed through my package manager, completion is no longer broken
           binary = 'postgrestools',
-          name = 'postgres_lsp',
+          -- name = 'postgres_lsp',
+          settings = {},
+        },
+        kulala_ls = {
+          binary = 'kulala-ls',
+          settings = {
+            filetypes = { 'http', 'rest' },
+            root_markers = { '.git' },
+          },
         },
       }
-      for _, server in pairs(manual_servers) do
-        if vim.fn.executable(server.binary) then
-          vim.lsp.enable(server.name)
+      for serverName, config in pairs(manual_servers) do
+        if vim.fn.executable(config.binary) then
+          vim.lsp.config(serverName, config.settings)
+          vim.lsp.enable(serverName)
         end
       end
 
