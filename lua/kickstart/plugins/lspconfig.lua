@@ -257,13 +257,12 @@ return {
         zls = {},
         clangd = {},
         bashls = {},
-        dockerls = {},
-        docker_compose_language_service = {},
         -- ['nil_ls'] = {},
         html = {},
         omnisharp = {},
         -- sqlls = {},
         texlab = {},
+        docker_language_server = {},
       }
 
       -- Ensure the servers and tools above are installed
