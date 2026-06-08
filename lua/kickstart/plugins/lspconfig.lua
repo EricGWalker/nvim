@@ -254,7 +254,7 @@ return {
         --   root_dir = require('lspconfig.util').root_pattern('manage.py', '.git'),
         --   cmd = { 'djlsp' },
         -- },
-        zls = {},
+        -- zls = {},
         clangd = {},
         bashls = {},
         -- ['nil_ls'] = {},
@@ -319,6 +319,10 @@ return {
             filetypes = { 'http', 'rest' },
             root_markers = { '.git' },
           },
+        },
+        zls = {
+          binary = 'zls',
+          settings = {},
         },
       }
       for serverName, config in pairs(manual_servers) do
